@@ -87,7 +87,7 @@ Next, add the texture that represents the enchantment effect.
 In this example, the Fire Aspect texture is animated, so it uses a sprite sheet.
 
 You can download my sprite sheet here:
-<a href="../../../public/images/fire_aspect.png" download class="link">fire_aspect.png</a>
+<a href="/images/fire_aspect.png" download class="link">fire_aspect.png</a>
 
 
 Place the file here:
