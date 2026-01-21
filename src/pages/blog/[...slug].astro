@@ -37,24 +37,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
       <div class="content">
         <Content />
       </div>
-
-      <div class="comments">
-        <script is:inline src="https://giscus.app/client.js"
-          data-repo="maker-lukas/lukasreis.com"
-          data-repo-id="R_kgDOQrrsrQ"
-          data-category="General"
-          data-category-id="DIC_kwDOQrrsrc4C0hYf"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="https://lukasreis.com-v2.1/giscus_theme.css"
-          data-lang="en"
-          crossorigin="anonymous"
-          async>
-        </script>
-      </div>
+      
     </div>
   </article>
 </Layout>
@@ -142,11 +125,5 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   .content :global(pre code) {
     background: none;
     padding: 0;
-  }
-
-  .comments {
-    margin-top: 4ch;
-    padding-top: 2ch;
-    border-top: 3px solid #7550A1;
   }
 </style>
