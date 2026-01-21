@@ -2,11 +2,12 @@
 title: "Minecraft Enchanted Textures Tutorial"
 description: "Learn how to make enchantment specific textures"
 date: 2026-01-02
-tags: ["tutorial"]
+tags: ["Tutorial", "Minecraft"]
 ---
 
 This is what you'll get after this tutorial
 
+![fire aspect](/images/fire_aspect.gif)
 
 ## Before You Start
 
@@ -34,18 +35,13 @@ project_root/
         ├── models/
         │   └── item/
         │       └── sword/
-        │           └── diamond/
-        │               └── fire_aspect.json
+        │           └── fire_aspect.json
         │
         ├── textures/
         │   └── item/
         │       └── sword/
-        │           ├── diamond/
-        │           │   └── diamond_sword.png
-        │           │
-        │           └── shared/
-        │               ├── fire_aspect.png
-        │               └── fire_aspect.png.mcmeta
+        │           ├── fire_aspect.png
+        │           └── fire_aspect.png.mcmeta
         │
         └── items/
             └── diamond_sword.json
@@ -58,16 +54,21 @@ Create <span class="codelet">`pack.mcmeta`</span> at the root of your project.
 Because this tutorial uses **data-driven item models**, the resource
 pack must target **Minecraft 1.21.5 or newer**.
 
-The <span class="codelet">`min_format`</span> value of <span class="codelet">`55`</span> corresponds to Minecraft **1.21.5**,
-which is when this feature was introduced.
+This will tell Minecraft exactly that
+
+`55` is the minimum format which coresponds to **1.21.5** and `2147483647` means all future versions will work
 
 ``` json
 {
   "pack": {
-    "description": "your pack description",
-    "min_format": 55
+    "pack_format": 55,
+    "supported_formats": [55, 2147483647],
+    "min_format": 55,
+    "max_format": 2147483647,
+    "description": "Better Enchanted Tool Textures!"
   }
 }
+
 ```
 
 ---
@@ -92,7 +93,7 @@ You can download my sprite sheet here:
 Place the file here:
 
 ```
-assets/minecraft/textures/item/sword/shared/
+assets/minecraft/textures/item/sword/
 ```
 
 ### Animated Texture
@@ -113,35 +114,28 @@ fire_aspect.png.mcmeta
 ```
 
 Minecraft runs at **20 ticks per second**, so: 
-- <span class="codelet">`frametime: 20`</span> = 1
-second
-- <span class="codelet">`frametime: 0.1`</span> = 0.1 seconds per frame
+- <span class="codelet">`frametime: 20`</span> = 1 second
+- <span class="codelet">`frametime: 2`</span> = 0.1 seconds per frame
 
 ---
 
 ## Item Model (Enchantment Overlay)
 
-Now we create the model that combines the base sword with the enchantment texture
+Now we create the model that applies the enchantment texture.
 
 Create this file:
 
 ```
-assets/minecraft/models/item/sword/diamond/fire_aspect.json
+assets/minecraft/models/item/sword/fire_aspect.json
 ```
 
-This model uses the default handheld sword model and renders two texture layers
-
-- <span class="codelet">`layer0`</span> renders first
-- <span class="codelet">`layer1`</span> renders on top of 0
-
-In my texture i want the Fire Aspect under the sword texture but if you have custom texture the layer order might be diffrent
+This model uses the default handheld sword model with a single texture layer for the enchantment effect.
 
 ``` json
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "minecraft:item/sword/shared/fire_aspect",
-    "layer1": "minecraft:item/sword/diamond/diamond_sword"
+    "layer0": "minecraft:item/sword/fire_aspect"
   }
 }
 ```
@@ -151,7 +145,7 @@ In my texture i want the Fire Aspect under the sword texture but if you have cus
 
 ## Enchantment Detection
 
-This part tels Minecraft when to switch models based on enchantments
+This part tells Minecraft when to switch models based on enchantments.
 
 Create this file:
 
@@ -168,12 +162,6 @@ JSON does not support comments. The comments below are for explanation only and 
         // Composite type allows combining multiple models
         "type": "minecraft:composite", 
         "models": [
-            // Base model: render the default diamond sword
-            {
-                "type": "minecraft:model",
-                "model": "minecraft:item/diamond_sword"
-            },
-
             // Conditional model: check if item has Fire Aspect enchantment
             {
                 "type": "minecraft:condition",
@@ -187,10 +175,15 @@ JSON does not support comments. The comments below are for explanation only and 
                     }
                 ],
                 // If enchantment is present: render the fire aspect overlay model
-                "on_true": {"type": "minecraft:model", "model": "minecraft:item/sword/diamond/fire_aspect"},
+                "on_true": {"type": "minecraft:model", "model": "minecraft:item/sword/fire_aspect"},
                 "on_false": {"type": "minecraft:empty"}
-            }
+            },
 
+            // Base model: render the default diamond sword
+            {
+                "type": "minecraft:model",
+                "model": "minecraft:item/diamond_sword"
+            }
         ]
     }
 }
@@ -241,5 +234,3 @@ If everything is correct, the texture should change.
 
 - Press <span class="codelet">F3 + T</span> to reload resource packs
 - Check file paths and enchantment IDs
-
----
