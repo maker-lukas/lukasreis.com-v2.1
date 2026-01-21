@@ -9,7 +9,7 @@ import { getCollection } from "astro:content";
 const featuredProjects = projects.slice(0, 2);
 const recentPosts = (await getCollection("blog"))
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-	.slice(0, 3);
+	.slice(0, 2);
 ---
 
 <Layout title="lukas/home">
@@ -99,6 +99,7 @@ const recentPosts = (await getCollection("blog"))
 
 	.text {
 		font-size: 20px;
+		font-weight: bold;
 	}
 
 	.link {

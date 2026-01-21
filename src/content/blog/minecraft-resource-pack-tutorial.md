@@ -1,7 +1,7 @@
 ---
-title: "minecraft enchanted textures"
-description: "minecraft resource pack"
-date: 2026-01-22
+title: "Minecraft Enchanted Textures Tutorial"
+description: "Learn how to make enchantment specific textures"
+date: 2026-01-02
 tags: ["tutorial"]
 ---
 
