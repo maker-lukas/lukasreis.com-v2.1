@@ -28,3 +28,7 @@ a:link {
 a:hover,a:active {
 	text-decoration: underline;
 }
+
+::selection {
+  background-color: #7550A1;
+}

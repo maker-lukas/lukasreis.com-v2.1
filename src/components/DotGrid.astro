@@ -1,0 +1,81 @@
+---
+
+---
+
+<canvas id="dotCanvas"></canvas>
+
+<style>
+	#dotCanvas {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: -1;
+		pointer-events: none;
+	}
+</style>
+
+<script>
+	const canvas = document.getElementById('dotCanvas') as HTMLCanvasElement;
+	const ctx = canvas.getContext('2d')!;
+
+	const SPACING = 40;
+	const MAX_DISTANCE = 155;
+	const DOT_MIN = 2;
+	const DOT_MAX = 10;
+	const BASE_COLOR = [69, 47, 94];
+	const HIGHLIGHT_COLOR = [117, 80, 161];
+
+	let mouseX = -1000;
+	let mouseY = -1000;
+
+	function resize() {
+		canvas.width = window.innerWidth
+		canvas.height = window.innerHeight
+	}
+
+	function draw() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		const cols = Math.floor(canvas.width / SPACING);
+		const rows = Math.floor(canvas.height / SPACING);
+
+		const offsetX = (canvas.width - (cols - 1) * SPACING) / 2;
+		const offsetY = (canvas.height - (rows - 1) * SPACING) / 2;
+
+		for (let row = 0; row < rows; row++) {
+			for (let col = 0; col < cols; col++) {
+				const x = offsetX + col * SPACING;
+				const y = offsetY + row * SPACING;
+
+				const dist = Math.abs(x - mouseX) + Math.abs(y - mouseY);
+
+				const t = Math.max(0, 1 - dist / MAX_DISTANCE);
+
+				const size = DOT_MIN + (DOT_MAX - DOT_MIN) * t;
+				
+				const r = Math.round(BASE_COLOR[0] + (HIGHLIGHT_COLOR[0] - BASE_COLOR[0]) * t);
+				const g = Math.round(BASE_COLOR[1] + (HIGHLIGHT_COLOR[1] - BASE_COLOR[1]) * t);
+				const b = Math.round(BASE_COLOR[2] + (HIGHLIGHT_COLOR[2] - BASE_COLOR[2]) * t);
+
+				ctx.beginPath();
+				ctx.arc(x, y, size, 0, Math.PI * 2);
+				ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+				ctx.fill();
+			}
+		}
+
+		requestAnimationFrame(draw);
+	}
+
+	resize();
+	window.addEventListener('resize', resize);
+	document.addEventListener('mousemove', e => {
+		mouseX = e.clientX;
+		mouseY = e.clientY;
+		console.log('Mouse position:', 'X', mouseX, 'Y', mouseY);
+	})
+
+	draw();
+</script>
