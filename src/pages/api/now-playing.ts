@@ -2,9 +2,10 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
-export const GET: APIRoute = async () => {
-  const API_KEY = import.meta.env.LASTFM_API_KEY;
-  const USERNAME = import.meta.env.LASTFM_USERNAME || 'your_username';
+export const GET: APIRoute = async ({ locals }) => {
+  const runtime = locals.runtime as { env: Record<string, string> } | undefined;
+  const API_KEY = runtime?.env?.LASTFM_API_KEY || import.meta.env.LASTFM_API_KEY;
+  const USERNAME = runtime?.env?.LASTFM_USERNAME || import.meta.env.LASTFM_USERNAME || 'your_username';
 
   if (!API_KEY) {
     return new Response(JSON.stringify({ error: 'Missing API key' }), {
