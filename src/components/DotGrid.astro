@@ -69,13 +69,17 @@
 		requestAnimationFrame(draw);
 	}
 
+	const isMobile = window.matchMedia('(pointer: coarse)').matches;
+
 	resize();
 	window.addEventListener('resize', resize);
-	document.addEventListener('mousemove', e => {
-		mouseX = e.clientX;
-		mouseY = e.clientY;
-		console.log('Mouse position:', 'X', mouseX, 'Y', mouseY);
-	})
+	
+	if (!isMobile) {
+		document.addEventListener('mousemove', e => {
+			mouseX = e.clientX;
+			mouseY = e.clientY;
+		});
+	}
 
 	draw();
 </script>
