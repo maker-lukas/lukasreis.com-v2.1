@@ -86,17 +86,17 @@ const recentPosts = (await getCollection("blog"))
 
 	.project {
 		flex: 1;
-		background: #452F5E;
+		background: var(--dark-purple);
 		border-radius: 10px;
 		min-height: 350px;
 		padding: 1ch;
-		border: 3px solid #7550A1;
+		border: 3px solid var(--purple);
 		cursor: pointer;
 		transition: border-color 0.2s ease;
 	}
 
 	.project:hover {
-		border-color: #A084C2;
+		border-color: var(--light-purple);
 	}
 
 	.text {
@@ -117,10 +117,10 @@ const recentPosts = (await getCollection("blog"))
 	}
 
 	.blog-post {
-		background: #452F5E;
+		background: var(--dark-purple);
 		border-radius: 10px;
 		padding: 1ch;
-		border: 3px solid #7550A1;
+		border: 3px solid var(--purple);
 		min-height: 115px;
 		cursor: pointer;
 		transition: border-color 0.2s ease;

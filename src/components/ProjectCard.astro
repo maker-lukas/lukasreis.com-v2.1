@@ -30,10 +30,10 @@ const { title, description, image, github } = Astro.props;
 
   .project {
     flex: 1;
-    background: #452F5E;
+    background: var(--dark-purple);
     border-radius: 10px;
     min-height: 350px;
-    border: 3px solid #7550A1;
+    border: 3px solid var(--purple);
     cursor: pointer;
     transition: border-color 0.2s ease;
     text-decoration: none;
@@ -44,7 +44,7 @@ const { title, description, image, github } = Astro.props;
   }
 
   .project:hover {
-    border-color: #A084C2;
+    border-color: var(--light-purple);
   }
 
   img {

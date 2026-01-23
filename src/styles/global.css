@@ -1,3 +1,13 @@
+:root {
+  --background-color: #140D1B;
+
+  --purple: #7550A1;
+  --light-purple: #A084C2;
+  --dark-purple: #452F5E;
+
+  --yellow: #FFDA0A;
+}
+
 @font-face {
   font-family: "JetBrains Mono";
   src: url(/public/fonts/JetBrainsMono[wght].ttf);
@@ -10,7 +20,7 @@
 }
 
 body {
-  background-color: #140D1B;
+  background-color: var(--background-color);
   color: white;
   font-family: "JetBrains Mono";
 
@@ -31,5 +41,5 @@ a:hover,a:active {
 
 ::selection {
   color: white;
-  background-color: #7550A1;
+  background-color: var(--purple);
 }

@@ -2,23 +2,25 @@
 
 ---
 	
-<p class="minimal-line"><span class="time-display"></span> · <span class="now-playing">Loading</span> · <span class="coded-today">Loading</span> coded today!</p>
+<p class="stats"><span class="time-display"></span><span class="now-playing-wrapper"><span class="sep">·</span><span class="now-playing">Loading</span></span><span class="sep">·</span><span class="coded-today">Loading</span> coded today!</p>
 
 <style>
-	.minimal-line {
+	.stats {
 		font-size: 14px;
-		color: #7550A1;
-		border-left: 3px solid #7550A1;
+		color: var(--yellow);
+		border-left: 3px solid var(--yellow);
 		padding-left: 12px;
 		margin-top: 20px;
 	}
 
-	:global(.now-playing a) {
-		color: #7550A1 !important;
+	.sep {
+		font-size: 1.4em;
+		margin: 0 6px;
+		vertical-align: -0.1em;
 	}
 
-	:global(.now-playing a:hover) {
-		color: #A084C2 !important;
+	:global(.now-playing a) {
+		color: var(--yellow) !important;
 	}
 </style>
 
@@ -50,13 +52,15 @@
 			if (data.error) {
 				el.innerHTML = 'Not available';
 			} else if (data.nowPlaying) {
+				const wrapper = document.querySelector('.now-playing-wrapper') as HTMLElement | null;
+				if (wrapper) wrapper.style.display = '';
 				el.innerHTML = `<a href="${data.songUrl}" target="_blank">${data.song}</a> - <a href="${data.artistUrl}" target="_blank">${data.artist}</a>`;
 			} else {
-				el.innerHTML = 'Nothing playing';
+				const wrapper = document.querySelector('.now-playing-wrapper') as HTMLElement | null;
+				if (wrapper) wrapper.style.display = 'none';
 			}
 		} catch {
 			const el = document.querySelector('.now-playing');
-			if (el) el.innerHTML = 'Not available';
 		}
 	}
 
