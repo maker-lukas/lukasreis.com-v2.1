@@ -1,16 +1,32 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-
 ---
 
 <Layout title="lukas/404">
   <div class="page">
     <h1>404</h1>
-    <p>Page not found</p>
-    <a class="back" href="/">← Back home</a>
+    <p id="message"></p>
+    <a class="back" href="/">← Escape</a>
   </div>
 </Layout>
+
+<script>
+  const quotes = [
+    { text: "There is no page.", source: "The Matrix" },
+    { text: "The page you requested is a lie.", source: "Portal" },
+    { text: "This is not the page you're looking for.", source: "Star Wars" },
+    { text: "I'm sorry, I can't let you view that, Dave.", source: "2001" },
+    { text: "Wake up, Neo... the page has you.", source: "The Matrix" },
+    { text: "Do you think that's air you're browsing?", source: "The Matrix" },
+    { text: "The page will be with you. Always.", source: "Star Wars" },
+    { text: "I've seen things you people wouldn't believe... like this missing page.", source: "Blade Runner" },
+    { text: "This was a triumph... I'm making a note here: PAGE NOT FOUND.", source: "Portal" },
+    { text: "You've met with a terrible fate, haven't you?", source: "Majora's Mask" },
+  ];
+
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById("message")!.innerHTML = `"${quote.text}"<span class="source"> — ${quote.source}</span>`;
+</script>
 
 <style>
   .page {
@@ -20,7 +36,7 @@ import Layout from "../layouts/Layout.astro";
     justify-content: center;
     text-align: center;
     min-height: 50vh;
-    gap: 1ch;
+    gap: 2ch;
   }
 
   h1 {
@@ -29,22 +45,34 @@ import Layout from "../layouts/Layout.astro";
     margin: 0;
   }
 
-  p {
+  #message {
     font-size: 1.25rem;
-    opacity: 0.8;
+    font-style: italic;
+    max-width: 450px;
+  }
+
+  .source {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    font-style: normal;
+    margin-top: 0.5ch;
   }
 
   .back {
-    margin-top: 2ch;
-    padding: 0.5ch 1.5ch;
-    background: var(--dark-purple);
-    border: 3px solid var(--purple);
-    border-radius: 8px;
-    transition: border-color 0.2s ease;
+    margin-top: 1ch;
+    padding: 0.75ch 2ch;
+    background: transparent;
+    border: 2px solid var(--yellow);
+    color: var(--yellow);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-weight: bold;
   }
 
   .back:hover {
-    border-color: var(--light-purple);
+    background: var(--yellow);
+    color: var(--background-color);
     text-decoration: none;
   }
 </style>
