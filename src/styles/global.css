@@ -1,5 +1,6 @@
 :root {
   --background-color: #140D1B;
+  --text-color:  #ffffff;
 
   --purple: #7550A1;
   --light-purple: #A084C2;
@@ -21,14 +22,14 @@
 
 body {
   background-color: var(--background-color);
-  color: white;
+  color: var(--text-color);
   font-family: "JetBrains Mono";
 
 	padding-inline: max(calc((100% - 750px) / 2), 20px);
 }
 
 a {
-    color: white;
+  color: var(--text-color);
 }
 
 a:link {

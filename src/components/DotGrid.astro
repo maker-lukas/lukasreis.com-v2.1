@@ -24,8 +24,16 @@
 	const MAX_DISTANCE = 150;
 	const DOT_MIN = 2;
 	const DOT_MAX = 11;
-	const BASE_COLOR = [69, 47, 94];
-	const HIGHLIGHT_COLOR = [117, 80, 161];
+
+	const style = getComputedStyle(document.documentElement);
+	
+	function hexToRgb(hex: string): [number, number, number] {
+		const h = hex.replace('#', '');
+		return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+	}
+
+	const BASE_COLOR = hexToRgb(style.getPropertyValue('--dark-purple').trim());
+	const HIGHLIGHT_COLOR = hexToRgb(style.getPropertyValue('--purple').trim());
 
 	let mouseX = -1000;
 	let mouseY = -1000;
