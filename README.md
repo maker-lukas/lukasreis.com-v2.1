@@ -1,6 +1,6 @@
 # lukasreis.com
 
-My personal website built with Astro, featuring blog and project pages.
+My personal website built with [Astro](https://astro.build), featuring blog and project pages.
 
 ---
 
